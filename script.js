@@ -406,7 +406,14 @@
   const researchModalTitle = document.getElementById('researchModalTitle');
   const researchModalMeta = document.getElementById('researchModalMeta');
   const researchModalDescription = document.getElementById('researchModalDescription');
+  const researchPaperLink = document.getElementById('researchPaperLink');
   const researchButtons = document.querySelectorAll('.research-link');
+
+  if (researchPaperLink) {
+    researchPaperLink.addEventListener('click', (event) => {
+      if (researchPaperLink.classList.contains('is-unavailable')) event.preventDefault();
+    });
+  }
 
   const closeResearchModal = () => {
     if (!researchModal) return;
@@ -426,6 +433,13 @@
         researchModalTitle.textContent = title;
         researchModalMeta.textContent = meta.textContent;
         researchModalDescription.textContent = description.textContent;
+        if (researchPaperLink) {
+          const paperUrl = button.dataset.paperUrl;
+          researchPaperLink.href = paperUrl || '#';
+          researchPaperLink.textContent = paperUrl ? 'See Paper' : 'Paper Coming Soon';
+          researchPaperLink.setAttribute('aria-disabled', String(!paperUrl));
+          researchPaperLink.classList.toggle('is-unavailable', !paperUrl);
+        }
         researchModal.classList.add('is-open');
         researchModal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
