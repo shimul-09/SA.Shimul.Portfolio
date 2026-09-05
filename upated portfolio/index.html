@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahrier Alam Shimul</title>
+    <meta name="description" content="Portfolio of Shahrier Alam Shimul — Software Developer, AI/ML enthusiast, and creative problem solver.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-ring"></div>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particles"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <svg class="social-icon-sprite" aria-hidden="true">
+        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.79-.26.79-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.31-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.05.14 3.01.4c2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.19.69.8.58A12 12 0 0 0 24 12C24 5.37 18.63 0 12 0Z"/></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+        <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.7 4.53-4.7 1.31 0 2.69.24 2.69.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.88v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.08 24 18.09 24 12.07Z"/></symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path d="M20.52 3.48A11.87 11.87 0 0 0 12.08 0C5.53 0 .2 5.33.2 11.88c0 2.09.55 4.13 1.59 5.93L.1 24l6.33-1.66a11.87 11.87 0 0 0 5.65 1.44h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.18-1.24-6.17-3.45-8.42Zm-8.44 18.28h-.01a9.86 9.86 0 0 1-5.03-1.38l-.36-.21-3.76.99 1-3.66-.23-.38a9.86 9.86 0 0 1-1.51-5.24C2.18 6.44 6.62 2 12.08 2a9.86 9.86 0 0 1 7.01 2.91A9.86 9.86 0 0 1 22 11.91c0 5.46-4.44 9.85-9.92 9.85Zm5.43-7.39c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z"/></symbol>
+        <symbol id="icon-email" viewBox="0 0 24 24"><path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.25l9 5.63 9-5.63V7H3Zm18 10V9.61l-8.47 5.3a1 1 0 0 1-1.06 0L3 9.61V17h18Z"/></symbol>
+    </svg>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>Shimul<span class="logo-bracket">/&gt;</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#research" class="nav-link">Research</a>
+                <a href="#resume" class="nav-link">Resume</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle day and night mode" aria-pressed="false">
+                <span class="theme-toggle-track"><span class="theme-toggle-thumb">
+                    <svg class="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg class="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>
+                </span></span>
+            </button>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#skills" class="mobile-link">Skills</a>
+            <a href="#education" class="mobile-link">Education</a>
+            <a href="#projects" class="mobile-link">Projects</a>
+            <a href="#research" class="mobile-link">Research</a>
+            <a href="#resume" class="mobile-link">Resume</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <!-- ========== SOCIAL SIDEBAR (sticky left) ========== -->
+    <aside class="social-sidebar" id="socialSidebar">
+        <a href="https://github.com/shimul-09" class="sidebar-social-link magnetic" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/shahrieralamshimul/" class="sidebar-social-link magnetic" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/shahrier.shimul.9/" class="sidebar-social-link magnetic" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.019 4.388 11.009 10.125 11.927v-8.437H7.078v-3.49h3.047V9.412c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.973h-1.514c-1.491 0-1.956.93-1.956 1.885v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.082 24 18.092 24 12.073z"/></svg>
+        </a>
+        <a href="mailto:shahrier333@gmail.com" class="sidebar-social-link magnetic" aria-label="Gmail">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+        <div class="sidebar-line"></div>
+    </aside>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="avatar-container" id="avatar">
+                <div class="avatar-ring"></div>
+                <div class="avatar-ring avatar-ring-2"></div>
+                <div class="avatar-img">
+                    <img src="avatar2.jpeg" alt="Shahrier Shimul">
+                    <div class="avatar-fallback-text">SS</div>
+                </div>
+                <div class="avatar-status"></div>
+            </div>
+            <div class="hero-text">
+                <p class="hero-greeting reveal-text">Hello, I'm</p>
+                <h1 class="hero-name reveal-text">Shahrier Alam Shimul</h1>
+                <div class="hero-title-wrapper reveal-text">
+                    <span class="hero-title-label">I'm a&nbsp;</span>
+                    <div class="hero-title-rotator">
+                        <span class="rotating-text">Backend Developer</span>
+                        <span class="rotating-text">Frontend Designer</span>
+                        <span class="rotating-text">Social Media Specialist</span>
+                        <span class="rotating-text">Problem Solver</span>
+                    </div>
+                </div>
+                <p class="hero-desc reveal-text">Crafting immersive digital experiences that blend creativity with cutting-edge technology.</p>
+                <div class="hero-cta reveal-text">
+                    <a href="#projects" class="btn btn-primary magnetic">
+                        <span>View My Work</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#contact" class="btn btn-outline magnetic">
+                        <span>Get In Touch</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag scroll-reveal">// ABOUT ME</span>
+                <h2 class="section-title scroll-reveal">Passionate About<br><span class="text-gradient">Digital Craft</span></h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text scroll-reveal">
+                    <p>I'm a Computer Science &amp; Engineering student and software developer focused on building practical solutions with Python, Django, JavaScript, databases, and modern web technologies. My projects include student job platforms, investment management systems, portfolio applications, and automated Selenium testing workflows.</p>
+                    <p>I'm also exploring AI and machine learning through computer vision, natural language processing, federated learning, and dataset development. Alongside software, I work with robotics, microcontrollers, IoT, Arduino, and ESP32-based systems, turning academic ideas into useful real-world projects.</p>
+                    <div class="about-cta">
+                        <a href="#" class="btn btn-primary magnetic">
+                            <span>Download CV</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card scroll-reveal" style="--delay: 0.1s">
+                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-suffix">+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <!--
+                    <div class="stat-card scroll-reveal" style="--delay: 0.2s">
+                        <div class="stat-number" data-target="30">0</div>
+                        <div class="stat-suffix">+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    -->
+                    <div class="stat-card scroll-reveal" style="--delay: 0.3s">
+                        <div class="stat-number" data-target="1">0</div>
+                        <div class="stat-suffix">+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <!--
+                    <div class="stat-card scroll-reveal" style="--delay: 0.4s">
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-suffix">+</div>
+                        <div class="stat-label">Awards Won</div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section class="section skills" id="skills"><div class="container">
+      <div class="section-header"><span class="section-tag scroll-reveal">// SKILLS</span><h2 class="section-title scroll-reveal">My <span class="text-gradient">Tech Stack</span></h2><p class="section-desc scroll-reveal">Technologies I use to build, deploy, and experiment with modern software.</p></div>
+      <div class="skill-category-grid">
+        <div class="skill-category scroll-reveal"><div class="skill-category-heading"><span class="category-number">01</span><h3>Programming Languages</h3></div><div class="skill-items">
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"><span>C</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"><span>C++</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"><span>Java</span></div>
+        </div></div>
+        <div class="skill-category scroll-reveal"><div class="skill-category-heading"><span class="category-number">02</span><h3>Web &amp; Frameworks</h3></div><div class="skill-items">
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"><span>HTML5</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"><span>CSS3</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><span>JavaScript</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django"><span>Django</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><span>Node.js</span></div>
+        </div></div>
+        <div class="skill-category scroll-reveal"><div class="skill-category-heading"><span class="category-number">03</span><h3>Databases</h3></div><div class="skill-items">
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"><span>MySQL</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQLite"><span>SQLite</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"><span>PostgreSQL</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"><span>MongoDB</span></div>
+        </div></div>
+        <div class="skill-category scroll-reveal"><div class="skill-category-heading"><span class="category-number">04</span><h3>AI &amp; Machine Learning</h3></div><div class="skill-items">
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy"><span>NumPy</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas"><span>Pandas</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow"><span>TensorFlow</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch"><span>PyTorch</span></div>
+        </div></div>
+        <div class="skill-category skill-category-wide scroll-reveal"><div class="skill-category-heading"><span class="category-number">05</span><h3>Tools &amp; Platforms</h3></div><div class="skill-items">
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"><span>GitHub</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><span>VS Code</span></div><div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"><span>Linux</span></div>
+        </div></div>
+      </div></div>
+    </section>
+
+    <!-- ========== EDUCATION ========== -->
+    <section class="section education" id="education"><div class="container">
+      <div class="section-header"><span class="section-tag scroll-reveal">// EDUCATION</span><h2 class="section-title scroll-reveal">Academic <span class="text-gradient">Journey</span></h2><p class="section-desc scroll-reveal">My educational background from school to university.</p></div>
+      <div class="education-timeline">
+        <div class="education-card scroll-reveal"><div class="education-icon">03</div><div class="education-content"><span class="education-level">Bachelor of Science</span><h3>University of Asia Pacific</h3><p class="education-meta">B.Sc. in Computer Science &amp; Engineering &nbsp;•&nbsp; Expected 2026</p><p>Currently pursuing a B.Sc. in Computer Science &amp; Engineering.</p></div></div>
+        <div class="education-card scroll-reveal"><div class="education-icon">02</div><div class="education-content"><span class="education-level">Higher Secondary Certificate </span><h3>Dhaka City College</h3><p class="education-meta">HSC &nbsp;•&nbsp; Year: 2021 &nbsp;•&nbsp; GPA: 5.00</p><p>Higher secondary education background.</p></div></div>
+        <div class="education-card scroll-reveal"><div class="education-icon">01</div><div class="education-content"><span class="education-level">Secondary School Certificate </span><h3>Birshrestha Munshi Abdur Rouf Public School</h3><p class="education-meta">SSC &nbsp;•&nbsp; Year: 2019 &nbsp;•&nbsp; GPA: 5.00</p><p>Secondary education background.</p></div></div>
+      </div></div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag scroll-reveal">// PORTFOLIO</span>
+                <h2 class="section-title scroll-reveal">Featured <span class="text-gradient">Projects</span></h2>
+                <p class="section-desc scroll-reveal">A curated selection of my recent work across web, mobile, and 3D experiences.</p>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.1s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #00B85C, #006B3C)">
+                        <div class="project-icon">💼</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Updated PTS</h3>
+                        <p>A Django-powered job-search platform built especially for students.</p>
+                        <div class="project-tags">
+                            <span>Django</span><span>Python</span><span>HTML</span><span>CSS</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/shimul-09/Updated-PTS" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.2s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #00C4CC, #092E20)">
+                        <div class="project-icon">👨‍💻</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Shimul 09 Developer Profile</h3>
+                        <p>A personal GitHub profile showcasing software development, AI, and web technology work.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Django</span><span>AI/ML</span><span>Web</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/shimul-09/shimul_09" class="project-link" target="_blank" rel="noopener noreferrer">View Profile →</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.3s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #0E7490, #164E63)">
+                        <div class="project-icon">💰</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Sohoj Biniyog</h3>
+                        <p>A halal SME crowdfunding and investment platform connecting business owners with investors.</p>
+                        <div class="project-tags">
+                            <span>Django</span><span>Python</span><span>SQLite</span><span>Selenium</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/Tahsin22201243/SohojWeb" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.4s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #F59E0B, #B45309)">
+                        <div class="project-icon">🧪</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>SeleniumTesting</h3>
+                        <p>A dedicated collection of automated website core tests for the SohojWeb platform.</p>
+                        <div class="project-tags">
+                            <span>Selenium</span><span>Python</span><span>Jupyter</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/Tahsin22201243/SeleniumTesting" class="project-link" target="_blank" rel="noopener noreferrer">View Tests →</a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.5s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #00cfc7, #075765)">
+                        <div class="project-icon">🌐</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Portfolio Website</h3>
+                        <p>A static personal portfolio site built with a Framer-style web export.</p>
+                        <div class="project-tags">
+                            <span>HTML</span><span>JavaScript</span><span>Framer</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/shimul-09/portfolio" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.6s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #0bbcc2, #12617a)">
+                        <div class="project-icon">🎓</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Part-Time Scholars</h3>
+                        <p>A Django web platform designed to connect students with part-time opportunities.</p>
+                        <div class="project-tags">
+                            <span>Django</span><span>Python</span><span>JavaScript</span><span>CSS</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/Ramim-515/Part-Time-Scholars" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.7s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #0F766E, #134E4A)">
+                        <div class="project-icon">🤖</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Robotics Project Documents</h3>
+                        <p>A collection of robotics reports, embedded-system resources, circuit documentation, and C source code.</p>
+                        <div class="project-tags">
+                            <span>Robotics</span><span>Arduino</span><span>C</span><span>Embedded Systems</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/MSakibR/Robotics_Project_Documents" class="project-link" target="_blank" rel="noopener noreferrer">View Repository →</a>
+                    </div>
+                </div>
+
+                <!-- Project 8 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.8s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #EA580C, #9A3412)">
+                        <div class="project-icon">⚙️</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Microcontroller Projects</h3>
+                        <p>Hands-on ESP32, ESP8266, and Arduino projects for IoT, sensors, automation, and embedded systems.</p>
+                        <div class="project-tags">
+                            <span>C++</span><span>ESP32</span><span>Arduino</span><span>IoT</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/MSakibR/Microcontroller" class="project-link" target="_blank" rel="noopener noreferrer">View Repository →</a>
+                    </div>
+                </div>
+
+                <!-- Project 9 -->
+                <div class="project-card tilt-card scroll-reveal" style="--delay: 0.9s">
+                    <div class="project-icon-wrapper" style="--gradient: linear-gradient(135deg, #16A34A, #166534)">
+                        <div class="project-icon">🌾</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>AYPMS</h3>
+                        <p>Agriculture Yield Prediction Management System database with schemas, data, and query resources.</p>
+                        <div class="project-tags">
+                            <span>T-SQL</span><span>SQL</span><span>Database</span><span>Agriculture</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay">
+                        <a href="https://github.com/MSakibR/agriculture_yield_prediction_management_system-AYPMS" class="project-link" target="_blank" rel="noopener noreferrer">View Repository →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== RESEARCH ========== -->
+    <section class="section research" id="research">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag scroll-reveal">// RESEARCH</span>
+                <h2 class="section-title scroll-reveal">Research <span class="text-gradient">Work</span></h2>
+                <p class="section-desc scroll-reveal">Selected research projects and papers from my academic work.</p>
+            </div>
+            <div class="research-grid">
+                <article class="research-card scroll-reveal" style="--delay: 0.1s">
+                    <div class="research-card-top"><span class="research-type">IoT Research</span><span class="research-status">No Dataset Contribution</span></div>
+                    <h3>Solar-Powered Smart Irrigation System with IoT</h3>
+                    <p class="research-meta">IoT Research, University of Asia Pacific - 2025</p>
+                    <p>This project introduces a solar-powered smart irrigation system using dual-axis sun tracking, ESP32 IoT connectivity, capacitive soil moisture sensing, and automated watering.</p>
+                    <p class="research-full-description">This project introduces a solar-powered smart irrigation system using dual-axis sun tracking, ESP32 IoT connectivity, capacitive soil moisture sensing, and automated watering. The system is designed to improve irrigation efficiency by monitoring field conditions and responding to soil moisture levels with an automated control workflow.</p>
+                    <button type="button" class="research-link" data-research-title="Solar-Powered Smart Irrigation System with IoT">Read More</button>
+                </article>
+                <article class="research-card scroll-reveal" style="--delay: 0.2s">
+                    <div class="research-card-top"><span class="research-type">Review Paper</span><span class="research-status">No Dataset Contribution</span></div>
+                    <h3>Federated Learning: A Privacy-Preserving Approach in AI</h3>
+                    <p class="research-meta">Review Paper, University of Asia Pacific - 2025</p>
+                    <p>A review of federated learning for secure and efficient data exchange across industries and e-commerce while reducing the need to share raw data.</p>
+                    <p class="research-full-description">Federated Learning (FL) has emerged as a disruptive paradigm in artificial intelligence, enabling collaborative training of models on decentralized devices while keeping data where it is generated. Unlike traditional centralized AI systems that collect and anonymize data in the cloud, FL preserves confidentiality by ensuring that raw data never leaves the user's device. In addressing privacy, security, and regulatory compliance concerns, FL offers strong advantages for sensitive data. This review presents a comprehensive overview of privacy-preserving techniques in Federated Learning, including secure aggregation, differential privacy, homomorphic encryption, and secure multi-party computation. The study examines major FL paradigms, covering system architectures, optimization strategies, adversarial threats, and real-world applications such as healthcare analytics, financial modeling, and Internet of Things (IoT) environments. Additionally, it discusses core challenges like communication efficiency, non-IID data, and system heterogeneity. Finally, the review outlines future research directions to enhance the robustness, scalability, and personalization of FL systems. This work contributes to the growing discussion on FL, emphasizing its importance as a foundational technology for building trustworthy and privacy-aware AI systems.</p>
+                    <button type="button" class="research-link" data-research-title="Federated Learning: A Privacy-Preserving Approach in AI">Read More</button>
+                </article>
+                <article class="research-card scroll-reveal" style="--delay: 0.3s">
+                    <div class="research-card-top"><span class="research-type">NLP Research</span><span class="research-status">View Dataset Contribution</span></div>
+                    <h3>BanglaAccent: Bangla Regional Dialect Speech Recognition System</h3>
+                    <p class="research-meta">NLP Research, University of Asia Pacific - 2026 - Ongoing</p>
+                    <p>Building an end-to-end speech-to-speech communication system for Bangla regional dialects using curated dialectal speech data.</p>
+                    <p class="research-full-description">BanglaAccent is an ongoing NLP research project focused on building an end-to-end speech-to-speech communication system for Bangla regional dialects. The work uses curated dialectal speech data to support recognition, processing, and generation across regional accents.</p>
+                    <button type="button" class="research-link" data-research-title="BanglaAccent: Bangla Regional Dialect Speech Recognition System">Read More</button>
+                </article>
+                <article class="research-card scroll-reveal" style="--delay: 0.4s">
+                    <div class="research-card-top"><span class="research-type">CV Research</span><span class="research-status">View Dataset Contribution</span></div>
+                    <h3>Visual Grounding Repair for Multimodal Large Language Models</h3>
+                    <p class="research-meta">CV Research, University of Asia Pacific - 2026 - Ongoing</p>
+                    <p>Proposing Visual Grounding Repair to detect, diagnose, and correct grounding hallucinations in multimodal large language models.</p>
+                    <p class="research-full-description">This ongoing computer vision research proposes Visual Grounding Repair to detect, diagnose, and correct grounding hallucinations in multimodal large language models. The project studies how visual references can be checked and repaired to improve the reliability of multimodal reasoning.</p>
+                    <button type="button" class="research-link" data-research-title="Visual Grounding Repair for Multimodal Large Language Models">Read More</button>
+                </article>
+                <article class="research-card scroll-reveal" style="--delay: 0.5s">
+                    <div class="research-card-top"><span class="research-type">Dataset Research</span><span class="research-status">View Dataset Contribution</span></div>
+                    <h3>Shukti Vision: A Visual Dataset of Traditional Bengali Dried Fish</h3>
+                    <p class="research-meta">CV Research, University of Asia Pacific - 2026 - Ongoing</p>
+                    <p>Curated and released a 1,537-image dataset across four dried fish types under eight backgrounds and four lighting conditions.</p>
+                    <p class="research-full-description">Shukti Vision is an ongoing computer vision dataset project that curated and released 1,537 images across four traditional dried fish types, eight backgrounds, and four lighting conditions. The dataset is intended to support visual recognition research involving Bengali dried fish.</p>
+                    <button type="button" class="research-link" data-research-title="Shukti Vision: A Visual Dataset of Traditional Bengali Dried Fish">Read More</button>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <div class="research-modal" id="researchModal" aria-hidden="true">
+        <div class="research-modal-backdrop" data-research-close></div>
+        <div class="research-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="researchModalTitle">
+            <button type="button" class="research-modal-close" aria-label="Close research details" data-research-close>&times;</button>
+            <span class="section-tag">// RESEARCH DETAILS</span>
+            <h2 id="researchModalTitle"></h2>
+            <p class="research-modal-meta" id="researchModalMeta"></p>
+            <p id="researchModalDescription"></p>
+            <div class="research-modal-actions">
+                <a href="#" class="research-paper-placeholder">Paper PDF Coming Soon</a>
+                <button type="button" class="research-modal-secondary" data-research-close>Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== RESUME ========== -->
+    <section class="section resume" id="resume">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag scroll-reveal">// EXPERIENCE</span>
+                <h2 class="section-title scroll-reveal">Work <span class="text-gradient">Timeline</span></h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item scroll-reveal" style="--delay: 0.1s">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023 - Current</div>
+                        <h3>Academic Web &amp; App Development Projects</h3>
+                        <h4>Full-Stack Development with IoT</h4>
+                        <p>Develop responsive, interactive, and user-friendly web applications using HTML, CSS, JavaScript, and frameworks like React or Vue.js. Optimize website performance for faster load times and ensure cross-browser compatibility and mobile responsiveness. Collaborate with UI/UX designers to translate designs into functional web pages.</p>
+                    </div>
+                </div>
+                <div class="timeline-item scroll-reveal" style="--delay: 0.2s">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025 - Current</div>
+                        <h3>Machine Learning &amp; Deep Learning Projects</h3>
+                        <h4>Enhancing AI/ML skills through practical projects and applications.</h4>
+                        <p>ML/DL Development: Worked on projects involving regression, classification, CNNs, and RNNs. Data Handling: Collected, cleaned, and analyzed datasets for training models. Model Deployment: Integrated ML/DL models into applications for predictive analytics and automation. Tools &amp; Frameworks: Python, TensorFlow, Keras, PyTorch, Scikit-learn, Jupyter Notebook.</p>
+                    </div>
+                </div>
+                <div class="timeline-item scroll-reveal" style="--delay: 0.3s">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023 - 2024</div>
+                        <h3>Full-Stack Developer</h3>
+                        <h4>Freelancer.com</h4>
+                        <p>Frontend Development: Designed and developed interactive, responsive user interfaces using HTML, CSS, JavaScript, and frameworks like React, Angular, or Vue.js. Backend Development: Built and maintained server-side applications using Node.js, Python (Django/Flask), Java (Spring Boot), or PHP (Laravel). Database Management: Designed, optimized, and managed databases using SQL (MySQL, PostgreSQL).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="resume-download scroll-reveal">
+                <a href="#" class="btn btn-primary btn-large magnetic">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <span>Download Full Resume</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag scroll-reveal">// CONTACT</span>
+                <h2 class="section-title scroll-reveal">Let's Work <span class="text-gradient">Together</span></h2>
+                <p class="section-desc scroll-reveal">Have a project in mind? Let's talk about how we can make it happen.</p>
+            </div>
+            <div class="contact-grid">
+                <form class="contact-form scroll-reveal" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" required placeholder=" ">
+                        <label for="name">Your Name</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required placeholder=" ">
+                        <label for="email">Email Address</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" placeholder=" ">
+                        <label for="subject">Subject</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="4" required placeholder=" "></textarea>
+                        <label for="message">Your Message</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large magnetic">
+                        <span>Send Message</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </form>
+                <div class="contact-info scroll-reveal">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <a href="mailto:shahrier333@gmail.com">shahrier333@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Dhaka, Bangladesh</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">💼</div>
+                        <div>
+                            <h4>Freelance</h4>
+                            <p>Available for hire</p>
+                        </div>
+                    </div>
+                    <div class="contact-socials">
+                        <h4>Find me on</h4>
+                        <div class="social-links-row">
+                            <a href="https://github.com/shimul-09" class="social-btn magnetic" target="_blank" rel="noopener noreferrer"><svg class="social-btn-icon" aria-hidden="true"><use href="#icon-github"></use></svg> GitHub</a>
+                            <a href="https://www.linkedin.com/in/shahrieralamshimul/" class="social-btn magnetic" target="_blank" rel="noopener noreferrer"><svg class="social-btn-icon" aria-hidden="true"><use href="#icon-linkedin"></use></svg> LinkedIn</a>
+                            <a href="https://www.facebook.com/shahrier.shimul.9/" class="social-btn magnetic" target="_blank" rel="noopener noreferrer"><svg class="social-btn-icon" aria-hidden="true"><use href="#icon-facebook"></use></svg> Facebook</a>
+                            <a href="https://instagram.com/__mr.selfishh__" class="social-btn magnetic" target="_blank" rel="noopener noreferrer"><svg class="social-btn-icon" aria-hidden="true"><use href="#icon-instagram"></use></svg> Instagram</a>
+                            <a href="https://wa.me/8801765343541" class="social-btn magnetic" target="_blank" rel="noopener noreferrer"><svg class="social-btn-icon" aria-hidden="true"><use href="#icon-whatsapp"></use></svg> WhatsApp</a>
+                            <a href="mailto:shahrier333@gmail.com" class="social-btn magnetic"><svg class="social-btn-icon" aria-hidden="true"><use href="#icon-email"></use></svg> Email</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#hero" class="footer-avatar-link" aria-label="Back to home">
+                    <img class="footer-avatar" src="avatar2.jpeg" alt="Shahrier Shimul">
+                    <span class="footer-status">&#10024;</span>
+                </a>
+                <h2 class="footer-title">Let's Build Something Amazing Together</h2>
+                <p class="footer-intro">I'm actively seeking web development, software development, and AI/ML internship opportunities where I can contribute to real-world projects. If you're looking for a passionate learner and developer, I'd love to connect.</p>
+                <div class="footer-actions">
+                    <a href="mailto:shahrier333@gmail.com" class="footer-action footer-action-primary magnetic">
+                        <span>&#9993;</span> Let's Connect
+                    </a>
+                    <a href="#resume" class="footer-action footer-action-secondary magnetic">
+                        Resume <span>&#8599;</span>
+                    </a>
+                </div>
+                <div class="footer-socials" aria-label="Social links">
+                    <a href="https://github.com/shimul-09" aria-label="GitHub"><svg class="footer-social-icon" aria-hidden="true"><use href="#icon-github"></use></svg> GitHub</a>
+                    <a href="https://www.linkedin.com/in/shahrieralamshimul/" aria-label="LinkedIn"><svg class="footer-social-icon" aria-hidden="true"><use href="#icon-linkedin"></use></svg> LinkedIn</a>
+                    <a href="https://www.facebook.com/shahrier.shimul.9/" aria-label="Facebook"><svg class="footer-social-icon" aria-hidden="true"><use href="#icon-facebook"></use></svg> Facebook</a>
+                    <a href="https://instagram.com/__mr.selfishh__" aria-label="Instagram"><svg class="footer-social-icon" aria-hidden="true"><use href="#icon-instagram"></use></svg> Instagram</a>
+                    <a href="https://wa.me/8801765343541" aria-label="WhatsApp"><svg class="footer-social-icon" aria-hidden="true"><use href="#icon-whatsapp"></use></svg> WhatsApp</a>
+                    <a href="mailto:shahrier333@gmail.com" aria-label="Email"><svg class="footer-social-icon" aria-hidden="true"><use href="#icon-email"></use></svg> Email</a>
+                </div>
+                <div class="footer-contact-details">
+                    <a href="mailto:shahrier333@gmail.com">&#9993; shahrier333@gmail.com</a>
+                    <a href="tel:+8801765343541">&#9742; +880 1765343541</a>
+                </div>
+                <p class="footer-copyright">&copy; 2026 Shahrier Shimul. Crafted with passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
